@@ -88,11 +88,17 @@ class UrlMonitorService : Service() {
 
     // POWIADOMIENIA
     private fun createForegroundNotification(): Notification {
+        val intent = Intent(this, MainActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0, intent, PendingIntent.FLAG_IMMUTABLE
+        )
+
         // stałe powiadomienie informujące o działaniu w tle
         return NotificationCompat.Builder(this, FOREGROUND_CHANNEL_ID)
             .setContentTitle("Monitorowanie URL włączone")
             .setContentText("Aplikacja sprawdza strony w tle")
             .setSmallIcon(android.R.drawable.ic_menu_info_details)
+            .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
     }
