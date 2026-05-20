@@ -23,7 +23,7 @@ import java.net.URL
 
 class MainActivity : AppCompatActivity() {
     // test:
-    // http://10.0.2.2:8000
+    // http://10.0.2.2:<port>
 
     private lateinit var urlAdapter: UrlAdapter
     private lateinit var db: AppDatabase

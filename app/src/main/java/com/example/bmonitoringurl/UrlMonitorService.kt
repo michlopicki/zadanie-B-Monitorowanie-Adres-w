@@ -5,7 +5,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
@@ -19,7 +18,7 @@ class UrlMonitorService : Service() {
 
     private val serviceScope = CoroutineScope(Dispatchers.IO + Job())
 
-    // Zmienna do kontrolowania częstotliwości odświeżania
+    // częstotliwość odświeżania
     private val checkIntervalMs = 5_000L // 5 sekund
 
     companion object {
@@ -100,7 +99,7 @@ class UrlMonitorService : Service() {
 
     private fun showAlertNotification(url: String) {
         // powiadomienie o zmianie na stronie
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         val intent = Intent(Intent.ACTION_VIEW, url.toUri())
         val pendingIntent = PendingIntent.getActivity(
@@ -122,7 +121,7 @@ class UrlMonitorService : Service() {
 
     private fun createNotificationChannels() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
             // Kanał dla ciągłego powiadomienia
             val fgChannel = NotificationChannel(
